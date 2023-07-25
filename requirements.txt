@@ -1,0 +1,4 @@
+openai
+tiktoken
+newsapi-python
+bs4
