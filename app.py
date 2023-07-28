@@ -16,16 +16,16 @@ runs = 0
 user = User()
 
 
-def Fourthwindow():
+def askGPTwindow():
     layout4 = [[sg.Button('Start', key = 'start')],
-               [sg.Text(size=(100, 20), font = ('Calibri', 11), key = 'news article')],
+               [sg.Text(size=(100, 20), font = ('Calibri', 15), key = 'news article')],
                [sg.Text("Use ChatGPT?", key = 'gpt prompt', visible = False)],
                [sg.Button('Yes', key = 'parse', visible = False), sg.Button('No', key = 'no parse', visible = False)],
                [sg.Text("Your desired response type? (0) Summarise | (1) Positive | (2) Negative :", key = 'res prompt', visible = False), sg.Input(size=(40, 1), key = 'response type', visible = False)],
                [sg.Button('Ask!', key = 'ask', visible = False)],
-               [sg.Text(size=(100, 20), font = ('Calibri', 11), key = 'chatgpt out')],
+               [sg.Text(size=(100, 20), font = ('Calibri', 15), key = 'chatgpt out')],
                [sg.Button('Continue', key = 'continue', visible = False)]]
-    window4 = sg.Window('Running', layout4)
+    window4 = sg.Window('Ask GPT', layout4)
     event, values = window4.read()
     window4['start'].Update(visible=False)
     urls = []
@@ -71,12 +71,12 @@ def Fourthwindow():
         elif event == "no parse":
             continue
 
-def Thirdwindow():
+def chooseSourceWindow():
     window.close()
     layout3 = [[sg.Text('Your desired source? (0) 雅虎 | (1) 香港01 | (2) 星島頭條 :'), sg.InputText(key='source')],
           [sg.Button('Ok'), sg.Button('Cancel')]
           ]
-    window3 = sg.Window('sort mode 1', layout3)
+    window3 = sg.Window('Choose your source', layout3)
     while True:
         event, values = window3.read()
         if event == "Exit" or event == sg.WIN_CLOSED:
@@ -84,7 +84,7 @@ def Thirdwindow():
         if values['source'] == '0' or values['source'] == '1' or values['source'] == '2':
             user.changeSource(int(values['source']))
             window3.close()
-            Fourthwindow()
+            askGPTwindow()
 
 
 sg.theme('DarkAmber')
@@ -100,11 +100,11 @@ while True:
     if values['sort mode'] == '1':
         user.changesortMode(1)
         window.close()
-        Thirdwindow()
+        chooseSourceWindow()
         break
     elif values ['sort mode'] == '0':
         user.changesortMode(1)
         window.close()
-        Fourthwindow()
+        askGPTwindow()
 
 window.close()
