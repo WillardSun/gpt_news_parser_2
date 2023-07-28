@@ -9,7 +9,7 @@ def returnTopbySource(source, user):
 
     soup = BeautifulSoup(requests.get(url).content, "html.parser")
     match user.source: 
-        case "星島頭條": body = soup.find_all(class_='news-detail')
+        case "星島頭條": body = soup.find_all(class_='news-detail') 
         case "香港01": body = soup.find_all('span', class_ = 'Box-v1-cltunW kGMtBp sc-1nfazpo-0 fCwjCB jvqc0e-6 iqoqdg')
         case "雅虎香港新聞": body = soup.find_all('a', class_='D(ib) Ov(h) Whs(nw) C($c-fuji-grey-l) C($c-fuji-blue-1-c):h Td(n) Fz(16px) Tov(e) Fw(700) Lh(20px)')
     
@@ -29,7 +29,7 @@ def returnTopbySource(source, user):
     return (urls)
 
 def parseUrl (url, source):
-    #print(url)
+    print(url)
     article2 = requests.get(url)
     article_content = article2.content
     soup_article = BeautifulSoup(article_content, 'html.parser')
